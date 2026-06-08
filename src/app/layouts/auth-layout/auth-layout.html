@@ -1,0 +1,45 @@
+<main
+  class="relative grid min-h-dvh grid-cols-2 items-center overflow-hidden bg-[radial-gradient(circle_at_18%_34%,rgba(0,18,60,0.14),transparent_20rem),radial-gradient(circle_at_68%_66%,rgba(0,74,177,0.07),transparent_24rem),linear-gradient(135deg,#fbfcfd_0%,#eef1f4_42%,#dfe4ea_100%)] px-[clamp(1.5rem,5vw,4.5rem)] py-[clamp(4rem,12vh,7rem)] text-[#00123c] before:pointer-events-none before:absolute before:inset-0 before:z-0 before:bg-[radial-gradient(circle,rgba(0,18,60,0.17)_1.8px,transparent_1.8px)] before:bg-[length:28px_28px] max-[860px]:grid-cols-1 max-[860px]:gap-5 max-[640px]:px-4 max-[640px]:py-6"
+  (pointermove)="handlePointerMove($event)"
+  (pointerleave)="handlePointerLeave()"
+>
+  <div class="pointer-events-none absolute inset-0 z-[1] transition-[background] duration-200" [style.background]="pointerGlow()"></div>
+  <div class="pointer-events-none absolute inset-0 z-0 bg-[radial-gradient(circle,rgba(0,18,60,0.08)_2.5px,transparent_2.5px)] bg-[length:76px_76px]"></div>
+  <div class="pointer-events-none absolute left-1/2 top-[18%] z-0 h-[64%] w-px bg-gradient-to-b from-transparent via-[#00123c]/15 to-transparent max-[860px]:hidden"></div>
+  <p class="pointer-events-none absolute bottom-6 left-1/2 z-10 m-0 -translate-x-1/2 text-[0.62rem] font-bold uppercase tracking-[0.34em] text-[#00123c]/35 max-[640px]:hidden">
+    Gemmatex Sellos
+  </p>
+
+  <section
+    class="auth-intro-panel auth-intro-panel--logo relative z-10 flex min-h-[24rem] items-center justify-center pr-[clamp(2rem,6vw,7rem)] max-[860px]:min-h-0 max-[860px]:pr-0"
+    [class.auth-intro-panel--waiting]="!entered()"
+    [class.auth-intro-panel--settling]="introSettling()"
+    aria-label="Gemmatex Sellos"
+  >
+    <a
+      class="inline-flex cursor-pointer touch-none no-underline will-change-transform"
+      routerLink="/"
+      aria-label="Gemmatex"
+      [style.transform]="logoTransform()"
+    >
+      <img
+        class="block h-auto w-[min(38vw,35rem)] min-w-80 max-[860px]:w-[min(72vw,22rem)] max-[860px]:min-w-64 max-[420px]:w-[min(82vw,19rem)] max-[420px]:min-w-0"
+        ngSrc="https://peru-crane-813567.hostingersite.com/Logos/Logo%20gemmatex%20azul.png"
+        width="544"
+        height="157"
+        priority
+        alt="Gemmatex"
+      />
+    </a>
+  </section>
+
+  <section
+    class="auth-intro-panel auth-intro-panel--form relative z-10 flex max-h-[calc(100dvh-clamp(2rem,8vw,6rem))] w-full justify-start overflow-auto pl-[clamp(0.75rem,2.8vw,3rem)] max-[860px]:max-h-none max-[860px]:justify-center max-[860px]:pl-0 max-[640px]:overflow-visible"
+    [class.auth-intro-panel--waiting]="!entered()"
+    [class.auth-intro-panel--settling]="introSettling()"
+  >
+    <div class="w-full max-w-[28rem]">
+      <router-outlet />
+    </div>
+  </section>
+</main>
