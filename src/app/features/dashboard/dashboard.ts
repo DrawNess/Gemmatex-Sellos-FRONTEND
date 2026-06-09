@@ -51,9 +51,9 @@ interface Stat {
           </div>
         </article>
 
-        <!-- Descuentos por canjear -->
+        <!-- Premios por canjear -->
         <div class="mt-8 flex items-center justify-between">
-          <h2 class="m-0 text-[1.02rem] font-[850] text-[#004ab1]">Descuentos por canjear</h2>
+          <h2 class="m-0 text-[1.02rem] font-[850] text-[#004ab1]">Premios por canjear</h2>
           @if (pendientes().length > 0) {
             <span class="rounded-full border border-[#d9e2ef] px-3 py-1 text-[0.74rem] font-bold text-[#57606a]">{{ pendientes().length }}</span>
           }
@@ -61,7 +61,7 @@ interface Stat {
 
         <article class="mt-3 overflow-hidden rounded-[1.05rem] border border-[#e1e7f0] bg-white">
           @if (pendientes().length === 0) {
-            <p class="m-0 px-5 py-8 text-center text-sm text-[#8a99ad]">No hay descuentos pendientes de canje.</p>
+            <p class="m-0 px-5 py-8 text-center text-sm text-[#8a99ad]">No hay premios pendientes de canje.</p>
           } @else {
             <div class="overflow-x-auto">
               <table class="w-full min-w-[40rem] border-collapse text-left text-[0.86rem]">

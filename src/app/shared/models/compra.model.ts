@@ -1,11 +1,7 @@
-export interface CompraItemPayload {
-  producto_id: number;
-  cantidad: number;
-}
-
 export interface CrearCompraPayload {
   cliente_id: number;
-  items: CompraItemPayload[];
+  nota_venta: number;
+  monto_total: number;
 }
 
 export interface CompraDetalle {
@@ -21,6 +17,7 @@ export interface Compra {
   id: number;
   cliente_id: number;
   vendedor_id: number;
+  nota_venta?: number | null;
   monto_total: string | number;
   sellos_otorgados: number;
   fecha: string;

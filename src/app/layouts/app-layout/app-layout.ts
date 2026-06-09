@@ -112,7 +112,6 @@ export class AppLayout {
     { label: 'Inicio', path: '/dashboard', ready: true },
     { label: 'Clientes', path: '/clientes', ready: true },
     { label: 'Ventas', path: '/ventas', ready: true },
-    { label: 'Catálogo', path: '/productos', ready: true },
     { label: 'Usuarios', path: '/usuarios', adminOnly: true, ready: true },
   ];
 

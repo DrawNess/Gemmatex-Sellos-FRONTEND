@@ -94,19 +94,19 @@ import { ClientesService } from './clientes.service';
               <div class="mt-5">
                 @if (c.descuento_canjeado) {
                   <p class="m-0 rounded-xl border border-[#e1e7f0] bg-[#f4f4f5] px-4 py-3 text-[0.86rem] font-semibold text-[#71717a]">
-                    Descuento ya canjeado
+                    Premio ya canjeado
                     @if (c.fecha_canje) { · {{ c.fecha_canje | date: 'dd/MM/yyyy' }} }
                     @if (c.canjeador) { · por {{ c.canjeador.nombre }} }
                   </p>
                 } @else if (c.descuento_ganado) {
                   <div class="flex flex-wrap items-center justify-between gap-3 rounded-xl border border-green-200 bg-green-50 px-4 py-3">
-                    <span class="text-[0.88rem] font-bold text-green-700">¡Tarjeta completa! El cliente tiene un descuento disponible.</span>
+                    <span class="text-[0.88rem] font-bold text-green-700">¡Tarjeta completa! El cliente puede girar la ruleta por su premio.</span>
                     <button
                       type="button"
                       class="rounded-[0.62rem] border border-green-700 bg-green-700 px-4 py-2 text-[0.82rem] font-extrabold text-white transition hover:bg-green-800"
                       (click)="canjeOpen.set(true)"
                     >
-                      Canjear descuento
+                      Canjear premio
                     </button>
                   </div>
                 } @else {
@@ -129,7 +129,7 @@ import { ClientesService } from './clientes.service';
                     <thead class="bg-[#f8fafc] text-[0.7rem] uppercase tracking-[0.08em] text-[#8a99ad]">
                       <tr>
                         <th class="px-3.5 py-2.5 font-bold">Fecha</th>
-                        <th class="px-3.5 py-2.5 font-bold">Productos</th>
+                        <th class="px-3.5 py-2.5 font-bold">Nota</th>
                         <th class="px-3.5 py-2.5 font-bold">Total</th>
                         <th class="px-3.5 py-2.5 font-bold">Sellos</th>
                         <th class="px-3.5 py-2.5 font-bold">Vendedor</th>
@@ -143,7 +143,7 @@ import { ClientesService } from './clientes.service';
                       @for (compra of compras(); track compra.id) {
                         <tr class="align-top">
                           <td class="whitespace-nowrap px-3.5 py-2.5 text-[#57606a]">{{ compra.fecha | date: 'dd/MM/yyyy HH:mm' }}</td>
-                          <td class="px-3.5 py-2.5 text-[#24292f]">{{ compra.detalles?.length || 0 }} ítem(s)</td>
+                          <td class="px-3.5 py-2.5 text-[#24292f]">{{ compra.nota_venta || '—' }}</td>
                           <td class="px-3.5 py-2.5 font-bold text-[#004ab1]">{{ money(compra.monto_total) }}</td>
                           <td class="px-3.5 py-2.5 text-[#57606a]">+{{ compra.sellos_otorgados }}</td>
                           <td class="px-3.5 py-2.5 text-[#57606a]">{{ compra.vendedor?.nombre || '—' }}</td>
@@ -209,7 +209,7 @@ import { ClientesService } from './clientes.service';
 
         @if (canjeOpen()) {
           <app-modal
-            title="Canjear descuento"
+            title="Canjear premio"
             subtitle="Esta acción es única por cliente y no se puede deshacer"
             size="sm"
             (closed)="canjeOpen.set(false)"
@@ -218,7 +218,7 @@ import { ClientesService } from './clientes.service';
               <p class="m-0 mb-3 rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-sm font-semibold text-red-700">{{ canjeError() }}</p>
             }
             <p class="m-0 text-[0.9rem] leading-relaxed text-[#57606a]">
-              Confirma que <strong class="text-[#004ab1]">{{ c.nombre }}</strong> usará su descuento del 10%.
+              Confirma que <strong class="text-[#004ab1]">{{ c.nombre }}</strong> girará la ruleta y recibirá su premio.
               La tarjeta quedará marcada como canjeada de forma permanente.
             </p>
             <div class="mt-6 flex flex-col-reverse gap-2 sm:flex-row sm:justify-end">
@@ -433,7 +433,7 @@ export class ClienteDetallePage implements OnInit {
         this.canjeOpen.set(false);
       },
       error: (e: HttpErrorResponse) => {
-        this.canjeError.set(httpErrorMessage(e, 'No se pudo canjear el descuento.'));
+        this.canjeError.set(httpErrorMessage(e, 'No se pudo canjear el premio.'));
         this.canjeando.set(false);
       },
     });
